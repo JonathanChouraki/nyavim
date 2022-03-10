@@ -24,5 +24,18 @@ packer.startup(function()
   use { 'itchyny/lightline.vim' } -- powerline alternative
   use { 'tpope/vim-surround' }
   use { 'tpope/vim-fugitive' } -- git integration
+  use { 'kyazdani42/nvim-web-devicons' } -- icons
+  use { 'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} } } -- fuzzy finder
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 end)
 
+require'nvim-web-devicons'.setup {
+  default = true;
+}
+
+require('telescope').setup{
+  defaults = {
+  }
+}
+
+require('telescope').load_extension('fzf')
