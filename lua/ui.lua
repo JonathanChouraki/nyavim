@@ -7,6 +7,9 @@ o.termguicolors = true
 cmd 'colorscheme palenight'
 g.palenight_terminal_italics = true
 
+-- set background color to none to appear seamless with alacritty padding
+cmd[[highlight Normal ctermbg=NONE guibg=NONE]]
+
 -- don't show current mode, handled by lightline
 o.showmode = false 
 
