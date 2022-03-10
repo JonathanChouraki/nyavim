@@ -55,3 +55,7 @@ o.lazyredraw = true
 
 -- completion settings
 o.completeopt="menuone,noinsert,noselect"
+
+-- highlight trailing space with the given character
+vim.opt.listchars = {trail = '.'}
+o.list = true
