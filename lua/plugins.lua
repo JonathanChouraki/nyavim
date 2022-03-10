@@ -19,10 +19,10 @@ local packer = require('packer')
 local use = packer.use
 
 packer.startup(function()
-  use {'wbthomason/packer.nvim', opt = true}  -- the package responsible for it all
-  use {'drewtempelmeyer/palenight.vim'} -- palenight theme
-  use {'itchyny/lightline.vim'} -- powerline alternative
-  use {'tpope/vim-surround'}
-  use {'tpope/vim-fugitive'} -- git integration
+  use { 'wbthomason/packer.nvim', opt = true }  -- the package responsible for it all
+  use { 'drewtempelmeyer/palenight.vim' } -- palenight theme
+  use { 'itchyny/lightline.vim' } -- powerline alternative
+  use { 'tpope/vim-surround' }
+  use { 'tpope/vim-fugitive' } -- git integration
 end)
 
