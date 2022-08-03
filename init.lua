@@ -7,6 +7,10 @@ require('ui')
 -- editor behavior
 require('ux')
 
+-- keybindings
 require('keybindings')
 
+require('completion')
+
+require('lsp')
 

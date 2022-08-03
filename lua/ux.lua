@@ -2,6 +2,7 @@
 local g = vim.g
 local o = vim.o
 local bo = vim.bo
+local opt = vim.opt
 
 -- indent with 2 spaces
 o.tabstop = 2
@@ -57,5 +58,24 @@ o.lazyredraw = true
 o.completeopt="menuone,noinsert,noselect"
 
 -- highlight trailing space with the given character
-vim.opt.listchars = {trail = '.'}
+--vim.opt.listchars:append({tab = '>'})
+vim.opt.listchars:append({trail = '.'})
 o.list = true
+
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+-- force fold update to prevent a bug with telescope
+vim.api.nvim_create_autocmd('BufRead', {
+   callback = function()
+      vim.api.nvim_create_autocmd('BufWinEnter', {
+         once = true,
+         command = 'normal! zx'
+      })
+      -- open all fold on buffer enter
+      vim.api.nvim_create_autocmd('BufWinEnter', {
+         once = true,
+         command = 'normal! zR'
+      })
+   end
+})

@@ -1,44 +1,61 @@
-local key = vim.api.nvim_set_keymap
-local opts = {noremap = true, silent = true}
-local normalMode = 'n'
-local visualMode = 'v'
-local insertMode = 'i'
+local wk = require('which-key')
+local utils = require('utils')
+local g = vim.g
 
-function executeCmd(cmd)
-   return '<cmd> ' .. cmd .. ' <cr>'
-end
-
-vim.g.mapleader = ' '
+g.mapleader = ' '
 
 -- split
-key(normalMode, '<leader>s', executeCmd('vsplit'), opts)
-key(normalMode, '<leader>b', executeCmd('split'), opts)
+utils.normalModeKeybind('<leader>s', 'vsplit')
+utils.normalModeKeybind('<leader>b', 'split')
 
 -- tab
-key(normalMode, '<leader>t', executeCmd('tabnew'), opts)
+utils.normalModeKeybind('<leader>t', 'tabnew')
 
 -- highlight deactivation
-key(normalMode, '<leader><space>', executeCmd('noh'), opts)
+utils.normalModeKeybind('<leader><space>', 'noh')
 
 -- windows
-key(normalMode, '<leader>h', executeCmd('wincmd h'), opts)
-key(normalMode, '<leader>j', executeCmd('wincmd j'), opts)
-key(normalMode, '<leader>k', executeCmd('wincmd k'), opts)
-key(normalMode, '<leader>l', executeCmd('wincmd l'), opts)
+utils.normalModeKeybind('<leader>h', 'wincmd h')
+utils.normalModeKeybind('<leader>j', 'wincmd j')
+utils.normalModeKeybind('<leader>k', 'wincmd k')
+utils.normalModeKeybind('<leader>l', 'wincmd l')
 
 --jump to matching symbol
-key(normalMode, '<tab>', '%', opts)
-key(visualMode, '<tab>', '%', opts)
+utils.normalModeKeybind('<tab>', '%')
+utils.visualModeKeybind('<tab>', '%')
 
 -- make yanking behave like delete and change
-key(visualMode, 'Y', 'y$', opts)
+utils.visualModeKeybind('Y', 'y$')
 
 -- telescope
-key(normalMode, '<leader>ff', executeCmd('lua require("telescope.builtin").find_files()'), opts)
-key(normalMode, '<leader>fg', executeCmd('lua require("telescope.builtin").live_grep()'), opts)
-key(normalMode, '<leader>fb', executeCmd('lua require("telescope.builtin").buffers()'), opts)
-key(normalMode, '<leader>f*', executeCmd('lua require("telescope.builtin").grep_string()'), opts)
-key(normalMode, '<leader>f/', executeCmd('lua require("telescope.builtin").current_buffer_fuzzy_find()'), opts)
-key(normalMode, '<leader>ftb', executeCmd('lua require("telescope.builtin").git_branches()'), opts)
-key(normalMode, '<leader>fts', executeCmd('lua require("telescope.builtin").git_stash()'), opts)
-key(normalMode, '<leader>ftc', executeCmd('lua require("telescope.builtin").git_commits()'), opts)
+utils.normalModeKeybind('<leader>ff', 'lua require("telescope.builtin").find_files()')
+utils.normalModeKeybind('<leader>fg', 'lua require("telescope.builtin").live_grep()')
+utils.normalModeKeybind('<leader>fb', 'lua require("telescope.builtin").buffers()')
+utils.normalModeKeybind('<leader>fm', 'lua require("telescope.builtin").marks()')
+utils.normalModeKeybind('<leader>f*', 'lua require("telescope.builtin").grep_string()')
+utils.normalModeKeybind('<leader>f/', 'lua require("telescope.builtin").current_buffer_fuzzy_find()')
+
+utils.normalModeKeybind('<leader>gb', 'lua require("telescope.builtin").git_branches()')
+utils.normalModeKeybind('<leader>gs', 'lua require("telescope.builtin").git_stash()')
+utils.normalModeKeybind('<leader>gc', 'lua require("telescope.builtin").git_commits()')
+
+-- file explorer
+utils.normalModeKeybind('<C-n>', 'NvimTreeToggle')
+
+wk.register({
+  f = {
+    name = "find",
+    f = "file",
+    g = "live grep",
+    b = "buffers",
+    m = "marks",
+    ["*"] = "strings",
+    ["/"] = "buffer fuzzy find",
+  },
+  g = {
+    name = "git",
+    b = "branch",
+    s = "stash",
+    c = "commit",
+  }
+}, { prefix = '<leader>' })

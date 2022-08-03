@@ -4,41 +4,45 @@ local cmd = vim.cmd
 
 -- setup theme
 o.termguicolors = true
-cmd 'colorscheme palenight'
-g.palenight_terminal_italics = true
+g.material_style = "palenight"
+cmd 'colorscheme material'
+
 
 -- set background color to none to appear seamless with alacritty padding
 cmd[[highlight Normal ctermbg=NONE guibg=NONE]]
+-- set line number column color to none to appear seamless with alacritty padding
+cmd[[highlight LineNr ctermbg=NONE guibg=NONE]]
+-- set sign column color to none to appear seamless with alacritty padding
+cmd[[highlight SignColumn ctermbg=NONE guibg=NONE]]
 
--- don't show current mode, handled by lightline
+-- don't show current mode, handled by lualine
 o.showmode = false 
 
 -- setup status line
-g.lightline = {
-  colorscheme = 'palenight';
-  active = {
-    left = {
-      { 'mode', 'paste' },
-      { 'readonly', 'filename', 'modified' }
-    };
-    right = {
-      { 'lineinfo'},
-      { 'filetype', 'gitbranch'},
-    };
-  };
-  component = {
-    readonly = '%{&readonly?"":""}',
-  };
-  component_function = {
-    gitbranch = 'fugitive#head'
-  };
-  separator = {
-    left = '';
-    right = '';
-  };
-  subseparator = {
-    left = '';
-    right = '';
-  };
-};
+require('lualine').setup {
+  options = {
+    refresh = {
+      statusline = 250,
+      tabline = 250,
+      winbar = 250,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {},
+    lualine_y = {'filetype'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {'filename'},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+}
 

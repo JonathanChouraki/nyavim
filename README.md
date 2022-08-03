@@ -7,7 +7,6 @@ my neovim lua config
 - *lua/packages.lua* packages definition
 - *lua/ui.lua* editor appearance
 - *lua/ux.lua* editor behavior
-- *lua/ux.lua* editor behavior
 - *lua/keybindings.lua* custom keybinds
 
 ## Theme
