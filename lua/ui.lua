@@ -5,8 +5,7 @@ local cmd = vim.cmd
 -- setup theme
 o.termguicolors = true
 g.material_style = "palenight"
-cmd 'colorscheme material'
-
+cmd 'colorscheme tokyonight'
 
 -- set background color to none to appear seamless with alacritty padding
 cmd[[highlight Normal ctermbg=NONE guibg=NONE]]

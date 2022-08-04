@@ -8,6 +8,8 @@ my neovim lua config
 - *lua/ui.lua* editor appearance
 - *lua/ux.lua* editor behavior
 - *lua/keybindings.lua* custom keybinds
+- *lua/completion.lua* completion configuration
+- *lua/lsp.lua* lsp configuration
 
 ## Theme
 - [palenight](https://github.com/drewtempelmeyer/palenight.vim)

@@ -20,7 +20,6 @@ local use = packer.use
 
 packer.startup(function()
   use { 'wbthomason/packer.nvim', opt = true }  -- the package responsible for it all
-  use { 'marko-cerovac/material.nvim' } -- material theme with palenight
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
   use { 'tpope/vim-surround' }
   use { 'tpope/vim-fugitive' } -- git integration
@@ -28,25 +27,37 @@ packer.startup(function()
   use { 'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} } } -- fuzzy finder
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- improved fuzzy finding with fzf
   use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons', opt = true }} -- file explorer
+  use { 'folke/which-key.nvim' } -- Popup with binding configuration
+  use { 'ggandor/leap.nvim'} -- Easy motion like plugin
+  use { 'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'} } -- better tabs
 
   use { 'neovim/nvim-lspconfig' } -- Collection of configurations for built-in LSP client
   use { 'hrsh7th/nvim-cmp' } -- Autocompletion plugin
   use { 'hrsh7th/cmp-nvim-lsp' } -- LSP source for nvim-cmp
   use { 'saadparwaiz1/cmp_luasnip' } -- Snippets source for nvim-cmp
   use { 'L3MON4D3/LuaSnip' } -- Snippets plugin
-
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- better syntax
 
-  use { "folke/which-key.nvim" } -- Popup with binding configuraiton
+  -- themes
+  use { 'marko-cerovac/material.nvim' } -- material theme with palenight
+  use { 'ChristianChiarulli/nvcode-color-schemes.vim' }
+  use { 'folke/tokyonight.nvim' }
+  use { 'yonlu/omni.vim' }
 end)
+
+require('telescope').setup{}
+require('telescope').load_extension('fzf')
+require('nvim-tree').setup()
+require('leap').setup{}
+require('leap').set_default_keymaps()
+require'bufferline'.setup {
+  tabpages = false,
+  auto_hide = true
+}
 
 require'nvim-web-devicons'.setup {
   default = true;
 }
-
-require('telescope').setup{}
-
-require('telescope').load_extension('fzf')
 
 require('which-key').setup{
   layout = {
@@ -57,7 +68,7 @@ require('which-key').setup{
   },
 }
 
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup{
   -- Automatically install missing parsers when entering buffer
   auto_install = true,
 
@@ -67,5 +78,3 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
-
-require("nvim-tree").setup()
