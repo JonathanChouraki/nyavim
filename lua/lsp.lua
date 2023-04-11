@@ -1,5 +1,6 @@
 local utils = require('utils')
 local wk = require('which-key')
+local lspconfig = require('lspconfig')
 
 utils.normalModeKeybind('<leader>lde', "lua vim.diagnostic.open_float(nil, {focus=false})")
 utils.normalModeKeybind('<leader>ldk', "lua vim.diagnostic.goto_prev()")
@@ -39,44 +40,62 @@ wk.register({
 })
 
 wk.register({
-  l = {
-    name = "lsp",
-    t = "type definition",
-    r = "rename",
-    c = "code action",
-    l = "references",
-    f = "format",
-    d = {
-      name = "diagnostic",
-      e = "open diagnostic",
-      n = "previous diagnostic",
-      p = "next diagnostic",
-      q = "loclist"
-    },
-    w = {
-      name = "workspace",
-      a = "add folder",
-      r = "remove folder"
-    },
-    g = {
-      name = "go",
-      D = "go to declaration",
-      d = "go to definition",
-      s = "go to implementation"
-    }
+  name = "lsp",
+  t = "type definition",
+  r = "rename",
+  c = "code action",
+  l = "references",
+  f = "format",
+  d = {
+    name = "diagnostic",
+    e = "open diagnostic",
+    n = "previous diagnostic",
+    p = "next diagnostic",
+    q = "loclist"
   },
-}, { prefix = '<leader>' })
+  w = {
+    name = "workspace",
+    a = "add folder",
+    r = "remove folder"
+  },
+  g = {
+    name = "go",
+    D = "go to declaration",
+    d = "go to definition",
+    s = "go to implementation"
+  }
+}, { prefix = '<leader>l' })
 
 local lsp_flags = {
 }
 
-require('lspconfig').tsserver.setup{
+lspconfig.tsserver.setup{
   on_attach = on_attach,
   flags = lsp_flags,
 }
 
-require('lspconfig').hls.setup{
+lspconfig.eslint.setup({
   on_attach = on_attach,
-  flags = lsp_flags
+  flags = lsp_flags,
+})
+
+lspconfig.hls.setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+  settings = {
+    haskell = {
+      formattingProvider = "brittany"
+    }
+  }
+}
+
+lspconfig.purescriptls.setup {
+  on_attach = on_attach,
+  flags = flags,
+  settings = {
+    purescript = {
+      addSpagoSources = true -- e.g. any purescript language-server config here
+    }
+  },
 }
 

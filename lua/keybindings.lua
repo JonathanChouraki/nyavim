@@ -4,12 +4,19 @@ local g = vim.g
 
 g.mapleader = ' '
 
+-- save all
+utils.normalModeKeybind('<C-s>', 'wa')
+
 -- split
 utils.normalModeKeybind('<leader>s', 'vsplit')
 utils.normalModeKeybind('<leader>b', 'split')
 
 -- tab
 utils.normalModeKeybind('<leader>t', 'tabnew')
+
+-- buffer navigation
+utils.normalModeKeybind('gh', 'bp')
+utils.normalModeKeybind('gl', 'bn')
 
 -- highlight deactivation
 utils.normalModeKeybind('<leader><space>', 'noh')
@@ -41,6 +48,10 @@ utils.normalModeKeybind('<leader>gc', 'lua require("telescope.builtin").git_comm
 
 -- file explorer
 utils.normalModeKeybind('<C-n>', 'NvimTreeToggle')
+
+-- comment
+utils.normalModeKeybind('<C-_>', 'CommentToggle')
+utils.visualModeKeybind('<C-_>', 'CommentToggle')
 
 wk.register({
   f = {

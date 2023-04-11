@@ -29,8 +29,9 @@ packer.startup(function()
   use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons', opt = true }} -- file explorer
   use { 'folke/which-key.nvim' } -- Popup with binding configuration
   use { 'ggandor/leap.nvim'} -- Easy motion like plugin
-  use { 'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'} } -- better tabs
+  use { 'terrortylor/nvim-comment' } -- comment block of code
 
+  -- lsp and completion
   use { 'neovim/nvim-lspconfig' } -- Collection of configurations for built-in LSP client
   use { 'hrsh7th/nvim-cmp' } -- Autocompletion plugin
   use { 'hrsh7th/cmp-nvim-lsp' } -- LSP source for nvim-cmp
@@ -50,10 +51,6 @@ require('telescope').load_extension('fzf')
 require('nvim-tree').setup()
 require('leap').setup{}
 require('leap').set_default_keymaps()
-require'bufferline'.setup {
-  tabpages = false,
-  auto_hide = true
-}
 
 require'nvim-web-devicons'.setup {
   default = true;
@@ -78,3 +75,4 @@ require('nvim-treesitter.configs').setup{
   },
 }
 
+require('nvim_comment').setup()
