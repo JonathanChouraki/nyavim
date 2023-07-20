@@ -1,15 +1,47 @@
-local utils = require('utils')
+local utils = require('nyavim.utils')
 local wk = require('which-key')
-local lspconfig = require('lspconfig')
+local lsp = require("lsp-zero")
+
+lsp.preset({})
+
+lsp.ensure_installed({
+  'tsserver',
+  'rust_analyzer',
+  'clangd'
+})
+
+-- Fix Undefined global 'vim'
+lsp.nvim_workspace()
+
+local cmp = require('cmp')
+local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_mappings = lsp.defaults.cmp_mappings({
+  ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+  ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+  ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  ["<C-Space>"] = cmp.mapping.complete(),
+  ['<C-Space>'] = cmp.mapping.complete(),
+})
+
+-- cmp_mappings['<Tab>'] = nil
+-- cmp_mappings['<S-Tab>'] = nil
+
+lsp.setup_nvim_cmp({
+  mapping = cmp_mappings
+})
+
+require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 utils.normalModeKeybind('<leader>lde', "lua vim.diagnostic.open_float(nil, {focus=false})")
 utils.normalModeKeybind('<leader>ldk', "lua vim.diagnostic.goto_prev()")
 utils.normalModeKeybind('<leader>ldj', "lua vim.diagnostic.goto_next()")
 utils.normalModeKeybind('<leader>lda', "lua vim.diagnostic.setloclist()")
 
-local on_attach = function(client, bufnr)
+lsp.on_attach(function(client, bufnr)
 
-  -- local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
   utils.normalModeKeybind('gD', "lua vim.lsp.buf.declaration()")
   utils.normalModeKeybind('gd', "lua vim.lsp.buf.definition()")
   utils.normalModeKeybind('gs', "lua vim.lsp.buf.implementation()")
@@ -26,18 +58,14 @@ local on_attach = function(client, bufnr)
   utils.normalModeKeybind('<leader>lc', "lua vim.lsp.buf.code_action()")
   utils.normalModeKeybind('<leader>ll', "lua vim.lsp.buf.references()")
   utils.normalModeKeybind('<leader>lf', "lua vim.lsp.buf.formatting()")
+
+  lsp.buffer_autoformat()
   --utils.normalModeKeybind('<leader>wl', function()
     -- print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   --end)
-end
+end)
 
-wk.register({
-  g = {
-    D = "Go to declaration",
-    d = "Go to definition",
-    s = "Go to implementation"
-  }
-})
+lsp.setup()
 
 wk.register({
   name = "lsp",
@@ -66,36 +94,10 @@ wk.register({
   }
 }, { prefix = '<leader>l' })
 
-local lsp_flags = {
-}
-
-lspconfig.tsserver.setup{
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-
-lspconfig.eslint.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
-
-lspconfig.hls.setup{
-  on_attach = on_attach,
-  flags = lsp_flags,
-  settings = {
-    haskell = {
-      formattingProvider = "brittany"
-    }
+wk.register({
+  g = {
+    D = "Go to declaration",
+    d = "Go to definition",
+    s = "Go to implementation"
   }
-}
-
-lspconfig.purescriptls.setup {
-  on_attach = on_attach,
-  flags = flags,
-  settings = {
-    purescript = {
-      addSpagoSources = true -- e.g. any purescript language-server config here
-    }
-  },
-}
-
+})
