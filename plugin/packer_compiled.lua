@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/home/box/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  catppuccin = {
+    loaded = true,
+    path = "/home/box/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/box/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -139,6 +144,16 @@ _G.packer_plugins = {
     path = "/home/box/.local/share/nvim/site/pack/packer/start/material.nvim",
     url = "https://github.com/marko-cerovac/material.nvim"
   },
+  neogit = {
+    loaded = true,
+    path = "/home/box/.local/share/nvim/site/pack/packer/start/neogit",
+    url = "https://github.com/NeogitOrg/neogit"
+  },
+  neorg = {
+    loaded = true,
+    path = "/home/box/.local/share/nvim/site/pack/packer/start/neorg",
+    url = "https://github.com/nvim-neorg/neorg"
+  },
   ["nvcode-color-schemes.vim"] = {
     loaded = true,
     path = "/home/box/.local/share/nvim/site/pack/packer/start/nvcode-color-schemes.vim",
@@ -189,6 +204,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/box/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["rest.nvim"] = {
+    loaded = true,
+    path = "/home/box/.local/share/nvim/site/pack/packer/start/rest.nvim",
+    url = "https://github.com/rest-nvim/rest.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,

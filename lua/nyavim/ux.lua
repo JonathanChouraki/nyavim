@@ -55,27 +55,27 @@ o.mouse = 'a'
 o.lazyredraw = true
 
 -- completion settings
-o.completeopt="menuone,noinsert,noselect"
+o.completeopt = "menuone,noinsert,noselect"
 
 -- highlight trailing space with the given character
 --vim.opt.listchars:append({tab = '>'})
-vim.opt.listchars:append({trail = '.'})
+vim.opt.listchars:append({ trail = '.' })
 o.list = true
 
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- opt.foldmethod = "expr"
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- force fold update to prevent a bug with telescope
-vim.api.nvim_create_autocmd('BufRead', {
-   callback = function()
-      vim.api.nvim_create_autocmd('BufWinEnter', {
-         once = true,
-         command = 'normal! zx'
-      })
-      -- open all fold on buffer enter
-      vim.api.nvim_create_autocmd('BufWinEnter', {
-         once = true,
-         command = 'normal! zR'
-      })
-   end
-})
+-- vim.api.nvim_create_autocmd('BufRead', {
+--    callback = function()
+--       vim.api.nvim_create_autocmd('BufWinEnter', {
+--          once = true,
+--          command = 'normal! zx'
+--       })
+--      -- open all fold on buffer enter
+--      vim.api.nvim_create_autocmd('BufWinEnter', {
+--        once = true,
+--        command = 'normal! zR'
+--      })
+--   end
+-- })
