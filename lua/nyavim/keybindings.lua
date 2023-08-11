@@ -1,8 +1,8 @@
-local wk = require('which-key')
 local utils = require('nyavim.utils')
 local g = vim.g
 
 g.mapleader = ' '
+g.maplocalleader = ','
 
 -- save all
 utils.normalModeKeybind('<C-s>', 'wa')
@@ -34,20 +34,5 @@ utils.visualModeKeybind('<tab>', '%')
 -- make yanking behave like delete and change
 utils.visualModeKeybind('Y', 'y$')
 
-wk.register({
-  f = {
-    name = "find",
-    f = "file",
-    g = "live grep",
-    b = "buffers",
-    m = "marks",
-    ["*"] = "strings",
-    ["/"] = "buffer fuzzy find",
-  },
-  g = {
-    name = "git",
-    b = "branch",
-    s = "stash",
-    c = "commit",
-  }
-}, { prefix = '<leader>' })
+-- search forward stay in place and center screen
+vim.keymap.set('n', '*', '*Nzz', { desc = 'Search and center screen' })
