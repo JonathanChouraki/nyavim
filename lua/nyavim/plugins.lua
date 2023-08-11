@@ -22,14 +22,16 @@ packer.startup(function()
   use { 'wbthomason/packer.nvim', opt = true } -- the package responsible for it all
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
   use { 'tpope/vim-surround' }
-  use { 'tpope/vim-fugitive' }                                                                 -- git integration
-  use { 'kyazdani42/nvim-web-devicons' }                                                       -- icons
-  use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/plenary.nvim' } } }          -- fuzzy finder
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }                             -- improved fuzzy finding with fzf
+  use { 'tpope/vim-fugitive' }                                                                  -- git integration
+  use { 'NeogitOrg/neogit', requires = 'nvim-lua/plenary.nvim' }                                -- git integration based on magit
+  use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/plenary.nvim' } } }           -- fuzzy finder
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }                              -- improved fuzzy finding with fzf
   use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons', opt = true } } -- file explorer
-  use { 'folke/which-key.nvim' }                                                               -- Popup with binding configuration
-  use { 'ggandor/leap.nvim' }                                                                  -- Easy motion like plugin
-  use { 'terrortylor/nvim-comment' }                                                           -- comment block of code
+  use { 'folke/which-key.nvim' }                                                                -- Popup with binding configuration
+  use { 'ggandor/leap.nvim' }                                                                   -- Easy motion like plugin
+  use { 'terrortylor/nvim-comment' }                                                            -- comment block of code
+  use { 'kyazdani42/nvim-web-devicons' }                                                        -- icons
+  use { "rest-nvim/rest.nvim", requires = { "nvim-lua/plenary.nvim" } }
 
   -- treesitter
   use {
@@ -74,6 +76,14 @@ packer.startup(function()
   use { 'ChristianChiarulli/nvcode-color-schemes.vim' }
   use { 'folke/tokyonight.nvim' }
   use { 'yonlu/omni.vim' }
+
+  -- note taking
+  use {
+    "nvim-neorg/neorg",
+    run = ":Neorg sync-parsers",
+    requires = "nvim-lua/plenary.nvim",
+  }
+  use { "catppuccin/nvim", as = "catppuccin" }
 end)
 
 require 'nvim-web-devicons'.setup {
