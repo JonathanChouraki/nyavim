@@ -16,6 +16,7 @@ wk.register({
     g = "live grep",
     b = "buffers",
     m = "marks",
+    j = "jumplist",
     ["*"] = "strings",
     ["/"] = "buffer fuzzy find",
   },
