@@ -28,11 +28,14 @@ utils.normalModeKeybind('<leader>k', 'wincmd k')
 utils.normalModeKeybind('<leader>l', 'wincmd l')
 
 --jump to matching symbol
-utils.normalModeKeybind('<tab>', '%')
-utils.visualModeKeybind('<tab>', '%')
-
+vim.api.nvim_set_keymap('v', '<tab>', '%', {})
+vim.api.nvim_set_keymap('n', '<tab>', '%', {})
+--
 -- make yanking behave like delete and change
 utils.visualModeKeybind('Y', 'y$')
 
 -- search forward stay in place and center screen
 vim.keymap.set('n', '*', '*Nzz', { desc = 'Search and center screen' })
+
+-- better keybind for fold toggle
+vim.api.nvim_set_keymap('n', 'zh', 'za', {})

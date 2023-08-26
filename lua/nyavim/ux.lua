@@ -62,20 +62,8 @@ o.completeopt = "menuone,noinsert,noselect"
 vim.opt.listchars:append({ trail = '.' })
 o.list = true
 
--- opt.foldmethod = "expr"
--- opt.foldexpr = "nvim_treesitter#foldexpr()"
-
--- force fold update to prevent a bug with telescope
--- vim.api.nvim_create_autocmd('BufRead', {
---    callback = function()
---       vim.api.nvim_create_autocmd('BufWinEnter', {
---          once = true,
---          command = 'normal! zx'
---       })
---      -- open all fold on buffer enter
---      vim.api.nvim_create_autocmd('BufWinEnter', {
---        once = true,
---        command = 'normal! zR'
---      })
---   end
--- })
+-- fold configuration (used with ufo)
+o.foldcolumn = '0' -- show a column with fold info, idk for now
+o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+o.foldlevelstart = 99
+o.foldenable = true

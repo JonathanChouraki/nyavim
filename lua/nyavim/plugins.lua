@@ -32,6 +32,7 @@ packer.startup(function()
   use { 'terrortylor/nvim-comment' }                                                            -- comment block of code
   use { 'kyazdani42/nvim-web-devicons' }                                                        -- icons
   use { "rest-nvim/rest.nvim", requires = { "nvim-lua/plenary.nvim" } }
+  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }                      -- better fold management
 
   -- treesitter
   use {
